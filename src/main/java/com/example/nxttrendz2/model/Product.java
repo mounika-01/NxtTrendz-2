@@ -39,7 +39,7 @@ public class Product {
         this.name = name;
     }
 
-    public String getDescripition() {
+    public String getDescription() {
         return description;
     }
 
