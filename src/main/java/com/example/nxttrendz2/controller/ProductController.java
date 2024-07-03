@@ -30,7 +30,7 @@ public class ProductController {
     }
 
     @PutMapping("/categories/products/{productId}")
-    public Product updateProduct(@PathVariable("productId")int productId, @RequestBody Peoduct product) {
+    public Product updateProduct(@PathVariable("productId")int productId, @RequestBody Product product) {
         return productJpaService.updateProduct(productId, product);
     }
 
