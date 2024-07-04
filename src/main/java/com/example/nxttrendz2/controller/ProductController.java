@@ -40,7 +40,7 @@ public class ProductController {
     }
 
     @GetMapping("/products/{productId}/category")
-    public category getProductCategory(@PathVariable("productId")int productId) {
+   public Category getProductCategory(@PathVariable("productId")int productId) { 
         return productJpaService.getProductCategory(productId);
     }
 }
