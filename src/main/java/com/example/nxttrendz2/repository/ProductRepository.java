@@ -17,5 +17,5 @@ public interface ProductRepository {
 
     void deleteProduct(int productId);
 
-    Category getProductCategory(int productId)
+    Category getProductCategory(int productId);
 }
