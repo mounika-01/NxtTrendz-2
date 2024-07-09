@@ -1,4 +1,5 @@
 package com.example.nxttrendz2.service;
+
 import com.example.nxttrendz2.model.Category;
 import com.example.nxttrendz2.model.Product;
 import com.example.nxttrendz2.repository.ProductJpaRepository;
@@ -24,7 +25,7 @@ public class ProductJpaService implements ProductRepository {
         ArrayList<Product> products = new ArrayList<>(productsList);
         return products;
     }
-    
+
     @Override
     public Product getProductById(int productId) {
         try {
@@ -34,39 +35,38 @@ public class ProductJpaService implements ProductRepository {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         }
     }
-    
+
     @Override
     public Product addProduct(Product product) {
         int categoryId = product.getCategory().getId();
-        
         Category category = categoryJpaService.getCategoryById(categoryId);
-        product.setCategory (category);
-        
+        product.setCategory(category);
         productJpaRepository.save(product);
         return product;
     }
 
     @Override
-    public Product updateProduct(int productId, Product product) {}
-    try {
-        Product newProduct = productJpaRepository.findById(productId).get();
-        if (product.getCategory() != null) {
-            int categoryId = product.getCategory().getId();
-            Category newCategory = categoryJpaService.getCategoryById(categoryId);
-            newProduct.setCategory(newCategory);
+    public Product updateProduct(int productId, Product product) {
+        try {
+            Product newProduct = productJpaRepository.findById(productId).get();
+            if (product.getCategory() != null) {
+                int categoryId = product.getCategory().getId();
+                Category newCategory = categoryJpaService.getCategoryById(categoryId);
+                newProduct.setCategory(newCategory);
+            }
+            if (product.getName() != null) {
+                newProduct.setName(product.getName());
+            }
+            if (product.getDescription() != null) {
+                newProduct.setDescription(product.getDescription());
+            }
+            if (product.getPrice() != null) {
+                newProduct.setPrice(product.getPrice());
+            }
+            productJpaRepository.save(newProduct);
+            return newProduct;
+        } catch (Exception e) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         }
-        if (product.getName() != null) {
-        newProduct.setName(product.getName());
-        }
-        if (product.getDescription() != null) {
-            newProduct.setDescription(product.getDescription());
-        }
-        if (product.getPrice() != null) {
-            newProduct.setPrice(product.getPrice());
-        }
-        productJpaRepository.save(newProduct);
-        return newProduct;
-      } catch (Exception e) {
-        throw new ResponseStatusException(HttpStatus.NOT_FOUND)
-      }
-}  
+    }
+}
