@@ -30,17 +30,17 @@ public class ProductController {
     }
 
     @PutMapping("/categories/products/{productId}")
-    public Product updateProduct(@PathVariable("productId")int productId, @RequestBody Product product) {
+    public Product updateProduct(@PathVariable("productId") int productId, @RequestBody Product product) {
         return productJpaService.updateProduct(productId, product);
     }
 
     @DeleteMapping("/categories/products/{productId}")
-    public void deleteProduct(@PathVariable("productId")int productId) {
+    public void deleteProduct(@PathVariable("productId") int productId) {
         productJpaService.deleteProduct(productId);
     }
 
     @GetMapping("/products/{productId}/category")
-   public Category getProductCategory(@PathVariable("productId")int productId) { 
+    public Category getProductCategory(@PathVariable("productId") int productId) {
         return productJpaService.getProductCategory(productId);
     }
 }
